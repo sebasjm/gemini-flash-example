@@ -1,7 +1,0 @@
-{
-  "name": "MerchantHub - Product & Catalog Manager",
-  "description": "A comprehensive tool for merchants to manage inventory, create curated product catalogs, and share professional collections with customers using AI-powered descriptions.",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}

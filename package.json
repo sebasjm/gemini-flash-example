@@ -7,6 +7,7 @@
     "build:js": "node esbuild.config.js",
     "build:html": "cp src/index.html dist/index.html",
     "build": "npm run build:css && npm run build:js && npm run build:html",
+    "release": "pnpm run build && sudo rm -rf ./docs/ && mv dist/ ./docs/",
     "dev": "npm run build && esbuild src/index.tsx --bundle --outfile=dist/index.js --servedir=dist --serve=8000"
   },
   "dependencies": {
