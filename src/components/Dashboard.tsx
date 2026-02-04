@@ -1,7 +1,7 @@
 
 import { useTranslation } from '../react-i18next';
 import { AppState, ViewState } from '../types';
-import { ShoppingBag, Book, Users, TrendingUp, Package } from 'lucide-react';
+import { ShoppingBag, Book, Users, TrendingUp, Package } from 'lucide-preact';
 import { h } from 'preact';
 
 interface Props {

@@ -1,7 +1,7 @@
 
 import React from 'preact/hooks';
 import { useTranslation } from '../react-i18next';
-import { ArrowLeft, MapPin, Hash } from 'lucide-react';
+import { ArrowLeft, MapPin, Hash } from 'lucide-preact';
 import { StorageLocation, Product } from '../types';
 import { h } from 'preact';
 

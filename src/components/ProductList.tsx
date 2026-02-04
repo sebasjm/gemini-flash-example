@@ -11,7 +11,7 @@ import {
   Trash2,
   Upload,
   X,
-} from "lucide-react";
+} from "lucide-preact";
 import React, { useRef, useState } from "preact/hooks";
 import { useTranslation } from "../react-i18next";
 import { generateProductDescription } from "../services/geminiService";

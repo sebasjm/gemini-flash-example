@@ -1,5 +1,5 @@
 
-import { Sparkles, X } from 'lucide-react';
+import { Sparkles, X } from 'lucide-preact';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from '../react-i18next';

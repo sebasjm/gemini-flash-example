@@ -8,7 +8,7 @@ import {
   X,
   Search,
   ChevronRight,
-} from "lucide-react";
+} from "lucide-preact";
 import { StorageLocation } from "../types";
 import { h } from "preact";
 

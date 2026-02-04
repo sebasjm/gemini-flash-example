@@ -11,7 +11,7 @@ import {
   Share2,
   Settings as SettingsIcon,
   MapPin,
-} from "lucide-react";
+} from "lucide-preact";
 import { useTranslation } from "./react-i18next";
 import {
   Product,
@@ -304,23 +304,23 @@ const App = () => {
   if (state.currentView === "public-view") return renderContent();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50 text-gray-900">
+    <div class="flex h-screen overflow-hidden bg-gray-50 text-gray-900">
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md"
+        class="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md"
       >
         {isSidebarOpen ? <X /> : <Menu />}
       </button>
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 transition-transform duration-300 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
+        class={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 transition-transform duration-300 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
-        <div className="flex items-center gap-3 p-6 border-b border-gray-100">
-          <div className="bg-indigo-600 p-2 rounded-lg">
-            <Store className="text-white w-6 h-6" />
+        <div class="flex items-center gap-3 p-6 border-b border-gray-100">
+          <div class="bg-indigo-600 p-2 rounded-lg">
+            <Store class="text-white w-6 h-6" />
           </div>
-          <h1 className="text-xl font-bold text-gray-900">MerchantHub</h1>
+          <h1 class="text-xl font-bold text-gray-900">MerchantHub</h1>
         </div>
-        <nav className="mt-6 px-4 space-y-1">
+        <nav class="mt-6 px-4 space-y-1">
           <SidebarLink
             icon={<LayoutDashboard size={20} />}
             label={t("Dashboard")}
@@ -374,8 +374,8 @@ const App = () => {
           />
         </nav>
       </aside>
-      <main className="flex-1 overflow-y-auto relative">
-        <div className="p-4 lg:p-8 pt-16 lg:pt-8 max-w-7xl mx-auto">
+      <main class="flex-1 overflow-y-auto relative">
+        <div class="p-4 lg:p-8 pt-16 lg:pt-8 max-w-7xl mx-auto">
           {renderContent()}
         </div>
       </main>
@@ -396,11 +396,11 @@ const SidebarLink = ({
 }) => (
   <button
     onClick={onClick}
-    className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-200 ${active ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200" : "text-gray-500 hover:bg-gray-100 hover:text-gray-900"}`}
+    class={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-200 ${active ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200" : "text-gray-500 hover:bg-gray-100 hover:text-gray-900"}`}
   >
     {icon}
-    <span className="font-medium">{label}</span>
-    {active && <ChevronRight size={16} className="ml-auto" />}
+    <span class="font-medium">{label}</span>
+    {active && <ChevronRight size={16} class="ml-auto" />}
   </button>
 );
 

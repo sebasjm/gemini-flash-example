@@ -1,7 +1,7 @@
 
 import React, { h } from 'preact';
 import { useTranslation } from '../react-i18next';
-import { Globe, Check } from 'lucide-react';
+import { Globe, Check } from 'lucide-preact';
 
 const Settings=  () => {
   const { t, i18n } = useTranslation();
