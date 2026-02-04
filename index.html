@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MerchantHub</title>
+  <!-- Compiled Tailwind CSS -->
+  <link rel="stylesheet" href="/dist/styles.css">
+  
+  <script type="importmap">
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10.22.0",
+    "preact/hooks": "https://esm.sh/preact@10.22.0/hooks",
+    "preact/compat": "https://esm.sh/preact@10.22.0/compat",
+    "react": "https://esm.sh/preact@10.22.0/compat",
+    "react-dom": "https://esm.sh/preact@10.22.0/compat",
+    "react/jsx-runtime": "https://esm.sh/preact@10.22.0/jsx-runtime",
+    "lucide-react": "https://esm.sh/lucide-react@0.363.0?external=preact/compat",
+    "@google/genai": "https://esm.sh/@google/genai@1.39.0",
+    "i18next": "https://esm.sh/i18next@23.10.0",
+    "react-i18next": "https://esm.sh/react-i18next@14.1.0?external=preact/compat",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "preact/": "https://esm.sh/preact@^10.28.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div id="root"></div>
+  <!-- Use the bundled script from the dist directory created by esbuild -->
+  <script type="module" src="/dist/index.js"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
