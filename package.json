@@ -5,8 +5,9 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/main.css -o ./dist/styles.css",
     "build:js": "node esbuild.config.js",
-    "build": "npm run build:css && npm run build:js",
-    "dev": "npm run build && esbuild src/index.tsx --bundle --outfile=dist/index.js --serve=8000"
+    "build:html": "cp src/index.html dist/index.html",
+    "build": "npm run build:css && npm run build:js && npm run build:html",
+    "dev": "npm run build && esbuild src/index.tsx --bundle --outfile=dist/index.js --servedir=dist --serve=8000"
   },
   "dependencies": {
     "preact": "^10.22.0",
