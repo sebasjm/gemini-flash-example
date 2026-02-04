@@ -2,7 +2,7 @@
 const esbuild = require('esbuild');
 
 esbuild.build({
-  entryPoints: ['index.tsx'],
+  entryPoints: ['src/index.tsx'],
   bundle: true,
   outfile: 'dist/index.js',
   minify: true,
@@ -16,7 +16,6 @@ esbuild.build({
   },
   jsxFactory: 'h',
   jsxFragment: 'Fragment',
-  inject: ['./preact-shim.js'],
   loader: {
     '.tsx': 'tsx',
     '.ts': 'ts'

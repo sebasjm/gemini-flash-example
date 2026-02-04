@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build:css": "tailwindcss -i ./main.css -o ./dist/styles.css",
+    "build:css": "tailwindcss -i ./src/main.css -o ./dist/styles.css",
     "build:js": "node esbuild.config.js",
     "build": "npm run build:css && npm run build:js",
-    "dev": "npm run build && esbuild index.tsx --bundle --outfile=dist/index.js --serve=8000"
+    "dev": "npm run build && esbuild src/index.tsx --bundle --outfile=dist/index.js --serve=8000"
   },
   "dependencies": {
     "preact": "^10.22.0",
