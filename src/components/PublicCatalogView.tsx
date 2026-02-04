@@ -1,11 +1,12 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { 
   ArrowLeft, ShoppingBag, Share2, X, ChevronLeft, ChevronRight, 
   Filter, Search, MapPin, Trash2, Plus, Minus, Check, Copy, Truck, ShoppingCart 
 } from 'lucide-react';
 import { Catalog, Product, Category, StorageLocation } from '../types';
+import { h, Fragment } from 'preact';
 
 interface CartItem {
   productId: string;
@@ -21,7 +22,7 @@ interface Props {
   onBack?: () => void;
 }
 
-const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, storageLocations = [], onBack }) => {
+const PublicCatalogView = ({ catalog, products, categories, storageLocations = [], onBack }: Props) => {
   const { t } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -107,62 +108,62 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col text-gray-900 overflow-x-hidden">
+    <div class="min-h-screen bg-gray-50 flex flex-col text-gray-900 overflow-x-hidden">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-[60] shadow-sm">
-        <div className="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header class="bg-white border-b border-gray-100 sticky top-0 z-[60] shadow-sm">
+        <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
+          <div class="flex items-center gap-4">
             {onBack && (
-              <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+              <button onClick={onBack} class="p-2 hover:bg-gray-100 rounded-full text-gray-500">
                 <ArrowLeft size={24} />
               </button>
             )}
-            <div className="text-2xl font-black italic tracking-tighter text-indigo-600">MERCHANT.SHOWCASE</div>
+            <div class="text-2xl font-black italic tracking-tighter text-indigo-600">MERCHANT.SHOWCASE</div>
           </div>
           
-          <div className="flex-1 max-w-xl px-8 hidden md:block">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <div class="flex-1 max-w-xl px-8 hidden md:block">
+            <div class="relative">
+              <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
               <input 
                 type="text" 
                 placeholder={t('Search products in {{name}}...', { name: catalog.name })}
-                className="w-full pl-12 pr-4 py-2.5 bg-gray-50 border-none rounded-full focus:ring-2 focus:ring-indigo-500/20 text-sm"
+                class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border-none rounded-full focus:ring-2 focus:ring-indigo-500/20 text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div class="flex items-center gap-4">
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-all"
+              class="relative p-2.5 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-all"
             >
               <ShoppingCart size={24} />
               {cart.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
+                <span class="absolute -top-1 -right-1 bg-indigo-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
                   {cart.reduce((s, i) => s + i.quantity, 0)}
                 </span>
               )}
             </button>
-            <button className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-full font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+            <button class="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-full font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
               <Share2 size={18} />
-              <span className="hidden sm:inline">{t('Share Catalog')}</span>
+              <span class="hidden sm:inline">{t('Share Catalog')}</span>
             </button>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 flex max-w-[1600px] mx-auto w-full">
+      <div class="flex-1 flex max-w-[1600px] mx-auto w-full">
         {/* Sidebar Filters */}
-        <aside className="w-72 border-r border-gray-100 bg-white p-8 hidden lg:block sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
-          <div className="space-y-10">
+        <aside class="w-72 border-r border-gray-100 bg-white p-8 hidden lg:block sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
+          <div class="space-y-10">
             <div>
-              <div className="flex items-center gap-2 mb-6 text-gray-400 uppercase tracking-[0.2em] font-black text-[10px]">
-                <Filter size={14} className="text-indigo-600" />
+              <div class="flex items-center gap-2 mb-6 text-gray-400 uppercase tracking-[0.2em] font-black text-[10px]">
+                <Filter size={14} class="text-indigo-600" />
                 <span>{t('Categories')}</span>
               </div>
-              <div className="space-y-1">
+              <div class="space-y-1">
                 <FilterButton active={!activeCategoryFilter} onClick={() => setActiveCategoryFilter(null)} label={t('All Categories')} />
                 {categories.map(cat => (
                   <FilterButton key={cat.id} active={activeCategoryFilter === cat.id} onClick={() => setActiveCategoryFilter(cat.id)} label={cat.name} />
@@ -171,11 +172,11 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
             </div>
 
             <div>
-              <div className="flex items-center gap-2 mb-6 text-gray-400 uppercase tracking-[0.2em] font-black text-[10px]">
-                <MapPin size={14} className="text-indigo-600" />
+              <div class="flex items-center gap-2 mb-6 text-gray-400 uppercase tracking-[0.2em] font-black text-[10px]">
+                <MapPin size={14} class="text-indigo-600" />
                 <span>{t('Locations')}</span>
               </div>
-              <div className="space-y-1">
+              <div class="space-y-1">
                 <FilterButton active={!activeLocationFilter} onClick={() => setActiveLocationFilter(null)} label={t('All Locations')} />
                 {storageLocations.map(loc => (
                   <FilterButton key={loc.id} active={activeLocationFilter === loc.id} onClick={() => setActiveLocationFilter(loc.id)} label={loc.name} />
@@ -186,50 +187,50 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
         </aside>
 
         {/* Main Product Content */}
-        <main className="flex-1 p-6 md:p-12">
+        <main class="flex-1 p-6 md:p-12">
           {Object.keys(groupedProducts).length === 0 ? (
-            <div className="py-24 text-center">
-              <div className="bg-indigo-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 text-indigo-600">
+            <div class="py-24 text-center">
+              <div class="bg-indigo-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 text-indigo-600">
                 <ShoppingBag size={48} />
               </div>
-              <h3 className="text-2xl font-black mb-4">{t('No matches found')}</h3>
-              <p className="text-gray-400 max-w-sm mx-auto">{t('Try adjusting your filters or search terms.')}</p>
+              <h3 class="text-2xl font-black mb-4">{t('No matches found')}</h3>
+              <p class="text-gray-400 max-w-sm mx-auto">{t('Try adjusting your filters or search terms.')}</p>
             </div>
           ) : (
-            <div className="space-y-20">
+            <div class="space-y-20">
               {/* Fix: Added explicit type cast to ensure Object.entries results are recognized as typed arrays to avoid "unknown" errors on items.length and items.map. */}
               {(Object.entries(groupedProducts) as [string, Product[]][]).map(([catName, items]) => (
                 <section key={catName}>
-                  <div className="flex items-center gap-4 mb-10">
-                    <h2 className="text-3xl font-black tracking-tighter uppercase italic">{catName}</h2>
-                    <div className="flex-1 h-px bg-gray-100"></div>
-                    <div className="text-xs font-bold text-gray-300 tracking-widest uppercase">{items.length} {t('Items')}</div>
+                  <div class="flex items-center gap-4 mb-10">
+                    <h2 class="text-3xl font-black tracking-tighter uppercase italic">{catName}</h2>
+                    <div class="flex-1 h-px bg-gray-100"></div>
+                    <div class="text-xs font-bold text-gray-300 tracking-widest uppercase">{items.length} {t('Items')}</div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                     {items.map(product => (
                       <div 
                         key={product.id} 
-                        className="group flex flex-col cursor-pointer bg-white p-4 rounded-[40px] border border-transparent hover:border-indigo-100 hover:shadow-2xl hover:shadow-indigo-500/5 transition-all duration-500"
+                        class="group flex flex-col cursor-pointer bg-white p-4 rounded-[40px] border border-transparent hover:border-indigo-100 hover:shadow-2xl hover:shadow-indigo-500/5 transition-all duration-500"
                         onClick={() => handleOpenProduct(product)}
                       >
-                        <div className="aspect-[4/5] bg-gray-100 rounded-[32px] overflow-hidden relative mb-6 shadow-sm">
-                          <img src={product.imageUrls[0]} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="aspect-[4/5] bg-gray-100 rounded-[32px] overflow-hidden relative mb-6 shadow-sm">
+                          <img src={product.imageUrls[0]} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                           {product.tag && (
-                            <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full text-xs font-black text-white shadow-xl" style={{ backgroundColor: product.tagColor || '#4f46e5' }}>
+                            <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full text-xs font-black text-white shadow-xl" style={{ backgroundColor: product.tagColor || '#4f46e5' }}>
                               {product.tag}
                             </div>
                           )}
-                          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div className="px-6 py-2.5 bg-white rounded-full font-black text-sm shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <div class="px-6 py-2.5 bg-white rounded-full font-black text-sm shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                               {t('Open Gallery')}
                             </div>
                           </div>
                         </div>
-                        <div className="px-2">
-                          <h3 className="text-xl font-bold mb-1 tracking-tight group-hover:text-indigo-600 transition-colors">{product.name}</h3>
-                          <div className="flex items-baseline justify-between gap-4">
-                            <div className="text-2xl font-black text-gray-900">${product.price?.toFixed(2)}</div>
-                            <div className="text-[10px] font-black text-gray-300 uppercase tracking-widest">SKU: {product.sku || 'N/A'}</div>
+                        <div class="px-2">
+                          <h3 class="text-xl font-bold mb-1 tracking-tight group-hover:text-indigo-600 transition-colors">{product.name}</h3>
+                          <div class="flex items-baseline justify-between gap-4">
+                            <div class="text-2xl font-black text-gray-900">${product.price?.toFixed(2)}</div>
+                            <div class="text-[10px] font-black text-gray-300 uppercase tracking-widest">SKU: {product.sku || 'N/A'}</div>
                           </div>
                         </div>
                       </div>
@@ -244,64 +245,64 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
 
       {/* Product Detail Overlay */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-black/90 backdrop-blur-xl">
-          <div className="bg-white w-full max-w-6xl rounded-[48px] overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in-95 duration-500 h-full max-h-[90vh]">
-            <div className="md:w-[60%] relative bg-gray-50 h-[350px] md:h-auto group">
+        <div class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-black/90 backdrop-blur-xl">
+          <div class="bg-white w-full max-w-6xl rounded-[48px] overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in-95 duration-500 h-full max-h-[90vh]">
+            <div class="md:w-[60%] relative bg-gray-50 h-[350px] md:h-auto group">
               {/* Fix: Added explicit cast to Product for selectedProduct to resolve "unknown" errors on imageUrls access. */}
-              <img src={(selectedProduct as Product).imageUrls[activeImageIndex]} className="w-full h-full object-contain md:object-cover transition-all duration-500" />
+              <img src={(selectedProduct as Product).imageUrls[activeImageIndex]} class="w-full h-full object-contain md:object-cover transition-all duration-500" />
               
               {(selectedProduct as Product).imageUrls.length > 1 && (
                 <>
                   <button 
                     onClick={(e) => { e.stopPropagation(); setActiveImageIndex(p => (p > 0 ? p - 1 : (selectedProduct as Product).imageUrls.length - 1)); }}
-                    className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all active:scale-90"
+                    class="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all active:scale-90"
                   >
                     <ChevronLeft size={28} />
                   </button>
                   <button 
                     onClick={(e) => { e.stopPropagation(); setActiveImageIndex(p => (p < (selectedProduct as Product).imageUrls.length - 1 ? p + 1 : 0)); }}
-                    className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all active:scale-90"
+                    class="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all active:scale-90"
                   >
                     <ChevronRight size={28} />
                   </button>
-                  <div className="absolute bottom-8 inset-x-0 flex justify-center gap-2">
+                  <div class="absolute bottom-8 inset-x-0 flex justify-center gap-2">
                     {(selectedProduct as Product).imageUrls.map((_, i) => (
-                      <button key={i} onClick={() => setActiveImageIndex(i)} className={`h-1.5 rounded-full transition-all ${i === activeImageIndex ? 'w-8 bg-indigo-600' : 'w-4 bg-gray-300'}`} />
+                      <button key={i} onClick={() => setActiveImageIndex(i)} class={`h-1.5 rounded-full transition-all ${i === activeImageIndex ? 'w-8 bg-indigo-600' : 'w-4 bg-gray-300'}`} />
                     ))}
                   </div>
                 </>
               )}
 
-              <button onClick={() => setSelectedProduct(null)} className="md:hidden absolute top-6 right-6 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl"><X size={24} /></button>
+              <button onClick={() => setSelectedProduct(null)} class="md:hidden absolute top-6 right-6 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl"><X size={24} /></button>
             </div>
             
-            <div className="md:w-[40%] p-8 md:p-16 flex flex-col h-full bg-white">
-              <button onClick={() => setSelectedProduct(null)} className="hidden md:flex self-end mb-12 text-gray-300 hover:text-gray-900 transition-colors"><X size={32} /></button>
-              <div className="flex-1 overflow-y-auto custom-scrollbar pr-4">
-                <div className="text-xs font-black text-indigo-600 mb-4 uppercase tracking-[0.3em]">{getCategoryName(selectedProduct.categoryId)}</div>
-                <h2 className="text-4xl lg:text-5xl font-black mb-6 leading-[0.9] tracking-tighter">{selectedProduct.name}</h2>
-                <div className="flex flex-wrap items-center gap-3 mb-8">
-                  <div className="text-4xl font-black text-gray-900">${selectedProduct.price?.toFixed(2)}</div>
+            <div class="md:w-[40%] p-8 md:p-16 flex flex-col h-full bg-white">
+              <button onClick={() => setSelectedProduct(null)} class="hidden md:flex self-end mb-12 text-gray-300 hover:text-gray-900 transition-colors"><X size={32} /></button>
+              <div class="flex-1 overflow-y-auto custom-scrollbar pr-4">
+                <div class="text-xs font-black text-indigo-600 mb-4 uppercase tracking-[0.3em]">{getCategoryName(selectedProduct.categoryId)}</div>
+                <h2 class="text-4xl lg:text-5xl font-black mb-6 leading-[0.9] tracking-tighter">{selectedProduct.name}</h2>
+                <div class="flex flex-wrap items-center gap-3 mb-8">
+                  <div class="text-4xl font-black text-gray-900">${selectedProduct.price?.toFixed(2)}</div>
                   {selectedProduct.tag && (
-                    <div className="px-4 py-1.5 rounded-full text-sm font-black text-white" style={{ backgroundColor: selectedProduct.tagColor || '#4f46e5' }}>
+                    <div class="px-4 py-1.5 rounded-full text-sm font-black text-white" style={{ backgroundColor: selectedProduct.tagColor || '#4f46e5' }}>
                       {selectedProduct.tag}
                     </div>
                   )}
                 </div>
-                <p className="text-lg text-gray-500 leading-relaxed font-medium mb-10">{selectedProduct.description}</p>
+                <p class="text-lg text-gray-500 leading-relaxed font-medium mb-10">{selectedProduct.description}</p>
               </div>
               
-              <div className="pt-8 border-t border-gray-50 flex flex-col gap-4">
+              <div class="pt-8 border-t border-gray-50 flex flex-col gap-4">
                 <button 
                   onClick={() => { addToCart(selectedProduct, 1); setSelectedProduct(null); }}
-                  className="w-full py-5 border-2 border-indigo-600 text-indigo-600 rounded-3xl font-black text-lg hover:bg-indigo-50 transition-all flex items-center justify-center gap-2"
+                  class="w-full py-5 border-2 border-indigo-600 text-indigo-600 rounded-3xl font-black text-lg hover:bg-indigo-50 transition-all flex items-center justify-center gap-2"
                 >
                   <ShoppingCart size={20} />
                   {t('Add to Cart & Continue')}
                 </button>
                 <button 
                   onClick={() => handleBuyNow(selectedProduct)}
-                  className="w-full py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all"
+                  class="w-full py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all"
                 >
                   {t('Buy Now')}
                 </button>
@@ -313,49 +314,49 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
 
       {/* Cart Wizard Overlay */}
       {isCartOpen && (
-        <div className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-12 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-2xl rounded-t-[48px] sm:rounded-[48px] overflow-hidden flex flex-col shadow-2xl animate-in slide-in-from-bottom sm:zoom-in duration-300 max-h-[95vh]">
-            <div className="p-8 border-b border-gray-50 flex justify-between items-center">
+        <div class="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-12 bg-black/60 backdrop-blur-sm">
+          <div class="bg-white w-full max-w-2xl rounded-t-[48px] sm:rounded-[48px] overflow-hidden flex flex-col shadow-2xl animate-in slide-in-from-bottom sm:zoom-in duration-300 max-h-[95vh]">
+            <div class="p-8 border-b border-gray-50 flex justify-between items-center">
               <div>
-                <h3 className="text-2xl font-black tracking-tight">{t('Your Cart')}</h3>
-                <div className="flex gap-2 mt-2">
+                <h3 class="text-2xl font-black tracking-tight">{t('Your Cart')}</h3>
+                <div class="flex gap-2 mt-2">
                   {[1, 2, 3].map(step => (
-                    <div key={step} className={`h-1.5 w-12 rounded-full transition-all ${step <= cartStep ? 'bg-indigo-600' : 'bg-gray-100'}`} />
+                    <div key={step} class={`h-1.5 w-12 rounded-full transition-all ${step <= cartStep ? 'bg-indigo-600' : 'bg-gray-100'}`} />
                   ))}
                 </div>
               </div>
-              <button onClick={() => setIsCartOpen(false)} className="p-3 hover:bg-gray-100 rounded-full text-gray-400 transition-colors">
+              <button onClick={() => setIsCartOpen(false)} class="p-3 hover:bg-gray-100 rounded-full text-gray-400 transition-colors">
                 <X size={28} />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+            <div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
               {cart.length === 0 ? (
-                <div className="py-20 text-center space-y-4">
-                  <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto text-gray-300">
+                <div class="py-20 text-center space-y-4">
+                  <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto text-gray-300">
                     <ShoppingCart size={32} />
                   </div>
-                  <h4 className="text-xl font-bold">{t('Empty Cart')}</h4>
-                  <p className="text-gray-400">{t('Your cart is lonely. Add some office supplies!')}</p>
+                  <h4 class="text-xl font-bold">{t('Empty Cart')}</h4>
+                  <p class="text-gray-400">{t('Your cart is lonely. Add some office supplies!')}</p>
                 </div>
               ) : (
                 <>
                   {cartStep === 1 && (
-                    <div className="space-y-6">
+                    <div class="space-y-6">
                       {cart.map(item => (
-                        <div key={item.productId} className="flex items-center gap-6 p-4 bg-gray-50 rounded-3xl group">
-                          <img src={item.product.imageUrls[0]} className="w-20 h-20 rounded-2xl object-cover" />
-                          <div className="flex-1 min-w-0">
-                            <h4 className="font-bold text-gray-900 truncate">{item.product.name}</h4>
-                            <div className="text-indigo-600 font-black mt-1">${item.product.price.toFixed(2)}</div>
+                        <div key={item.productId} class="flex items-center gap-6 p-4 bg-gray-50 rounded-3xl group">
+                          <img src={item.product.imageUrls[0]} class="w-20 h-20 rounded-2xl object-cover" />
+                          <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-gray-900 truncate">{item.product.name}</h4>
+                            <div class="text-indigo-600 font-black mt-1">${item.product.price.toFixed(2)}</div>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <div className="flex items-center bg-white border border-gray-200 rounded-2xl p-1">
-                              <button onClick={() => updateCartQuantity(item.productId, -1)} className="p-2 hover:bg-gray-50 rounded-xl text-gray-400"><Minus size={16} /></button>
-                              <span className="w-8 text-center font-black">{item.quantity}</span>
-                              <button onClick={() => updateCartQuantity(item.productId, 1)} className="p-2 hover:bg-gray-50 rounded-xl text-gray-400"><Plus size={16} /></button>
+                          <div class="flex items-center gap-3">
+                            <div class="flex items-center bg-white border border-gray-200 rounded-2xl p-1">
+                              <button onClick={() => updateCartQuantity(item.productId, -1)} class="p-2 hover:bg-gray-50 rounded-xl text-gray-400"><Minus size={16} /></button>
+                              <span class="w-8 text-center font-black">{item.quantity}</span>
+                              <button onClick={() => updateCartQuantity(item.productId, 1)} class="p-2 hover:bg-gray-50 rounded-xl text-gray-400"><Plus size={16} /></button>
                             </div>
-                            <button onClick={() => removeFromCart(item.productId)} className="p-3 text-gray-300 hover:text-red-500 rounded-2xl hover:bg-red-50 transition-all"><Trash2 size={20} /></button>
+                            <button onClick={() => removeFromCart(item.productId)} class="p-3 text-gray-300 hover:text-red-500 rounded-2xl hover:bg-red-50 transition-all"><Trash2 size={20} /></button>
                           </div>
                         </div>
                       ))}
@@ -363,34 +364,34 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
                   )}
 
                   {cartStep === 2 && (
-                    <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
-                      <div className="bg-indigo-50 p-6 rounded-3xl flex items-start gap-4 mb-8">
-                        <Truck className="text-indigo-600 mt-1" size={24} />
+                    <div class="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                      <div class="bg-indigo-50 p-6 rounded-3xl flex items-start gap-4 mb-8">
+                        <Truck class="text-indigo-600 mt-1" size={24} />
                         <div>
-                          <h4 className="font-bold text-indigo-900">{t('Shipping Address')}</h4>
-                          <p className="text-sm text-indigo-600/70">{t('We need to know where to send your high-quality supplies!')}</p>
+                          <h4 class="font-bold text-indigo-900">{t('Shipping Address')}</h4>
+                          <p class="text-sm text-indigo-600/70">{t('We need to know where to send your high-quality supplies!')}</p>
                         </div>
                       </div>
-                      <div className="space-y-4">
+                      <div class="space-y-4">
                         <input 
                           type="text" 
                           placeholder="Street Address" 
-                          className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
+                          class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
                           value={shippingAddress.street}
                           onChange={e => setShippingAddress({ ...shippingAddress, street: e.target.value })}
                         />
-                        <div className="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-4">
                           <input 
                             type="text" 
                             placeholder="City" 
-                            className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
+                            class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
                             value={shippingAddress.city}
                             onChange={e => setShippingAddress({ ...shippingAddress, city: e.target.value })}
                           />
                           <input 
                             type="text" 
                             placeholder="Zip Code" 
-                            className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
+                            class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
                             value={shippingAddress.zip}
                             onChange={e => setShippingAddress({ ...shippingAddress, zip: e.target.value })}
                           />
@@ -400,35 +401,35 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
                   )}
 
                   {cartStep === 3 && (
-                    <div className="space-y-8 animate-in slide-in-from-right-4 duration-300">
-                      <div className="text-center">
-                        <div className="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div class="space-y-8 animate-in slide-in-from-right-4 duration-300">
+                      <div class="text-center">
+                        <div class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
                           <Check size={40} />
                         </div>
-                        <h4 className="text-3xl font-black">{t('Your order is ready!')}</h4>
-                        <p className="text-gray-500 mt-2">{t('Review the summary below and share it with the merchant.')}</p>
+                        <h4 class="text-3xl font-black">{t('Your order is ready!')}</h4>
+                        <p class="text-gray-500 mt-2">{t('Review the summary below and share it with the merchant.')}</p>
                       </div>
 
-                      <div className="bg-gray-50 p-8 rounded-[32px] space-y-4">
-                        <div className="flex justify-between font-black text-sm uppercase tracking-widest text-gray-400 border-b border-gray-100 pb-4">
+                      <div class="bg-gray-50 p-8 rounded-[32px] space-y-4">
+                        <div class="flex justify-between font-black text-sm uppercase tracking-widest text-gray-400 border-b border-gray-100 pb-4">
                           <span>{t('Summary')}</span>
                           <span>{cart.length} {t('Items')}</span>
                         </div>
-                        <div className="space-y-2 py-4">
+                        <div class="space-y-2 py-4">
                           {cart.map(item => (
-                            <div key={item.productId} className="flex justify-between items-center text-sm">
-                              <span className="font-bold">{item.product.name} <span className="text-gray-400">x{item.quantity}</span></span>
-                              <span className="font-mono">${(item.product.price * item.quantity).toFixed(2)}</span>
+                            <div key={item.productId} class="flex justify-between items-center text-sm">
+                              <span class="font-bold">{item.product.name} <span class="text-gray-400">x{item.quantity}</span></span>
+                              <span class="font-mono">${(item.product.price * item.quantity).toFixed(2)}</span>
                             </div>
                           ))}
                         </div>
-                        <div className="flex justify-between items-center pt-4 border-t border-gray-100 text-2xl font-black">
+                        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-2xl font-black">
                           <span>{t('Total')}</span>
-                          <span className="text-indigo-600">${cartTotal.toFixed(2)}</span>
+                          <span class="text-indigo-600">${cartTotal.toFixed(2)}</span>
                         </div>
                         {shippingAddress.street && (
-                          <div className="pt-4 text-sm text-gray-500">
-                            <div className="font-black uppercase text-[10px] tracking-widest mb-1">{t('Location')}</div>
+                          <div class="pt-4 text-sm text-gray-500">
+                            <div class="font-black uppercase text-[10px] tracking-widest mb-1">{t('Location')}</div>
                             <p>{shippingAddress.street}, {shippingAddress.city} {shippingAddress.zip}</p>
                           </div>
                         )}
@@ -440,16 +441,16 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
             </div>
 
             {cart.length > 0 && (
-              <div className="p-8 border-t border-gray-50 bg-white">
+              <div class="p-8 border-t border-gray-50 bg-white">
                 {cartStep === 1 && (
-                  <div className="flex items-center gap-6">
-                    <div className="flex-1">
-                      <div className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{t('Total')}</div>
-                      <div className="text-3xl font-black text-gray-900">${cartTotal.toFixed(2)}</div>
+                  <div class="flex items-center gap-6">
+                    <div class="flex-1">
+                      <div class="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{t('Total')}</div>
+                      <div class="text-3xl font-black text-gray-900">${cartTotal.toFixed(2)}</div>
                     </div>
                     <button 
                       onClick={() => setCartStep(2)}
-                      className="flex-1 py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all flex items-center justify-center gap-2"
+                      class="flex-1 py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all flex items-center justify-center gap-2"
                     >
                       {t('Proceed to Shipping')}
                       <ChevronRight size={20} />
@@ -457,34 +458,34 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
                   </div>
                 )}
                 {cartStep === 2 && (
-                  <div className="flex gap-4">
+                  <div class="flex gap-4">
                     <button 
                       onClick={() => setCartStep(3)}
-                      className="flex-1 py-5 border-2 border-gray-200 text-gray-500 rounded-3xl font-black text-lg hover:bg-gray-50 transition-all"
+                      class="flex-1 py-5 border-2 border-gray-200 text-gray-500 rounded-3xl font-black text-lg hover:bg-gray-50 transition-all"
                     >
                       {t('Skip for now')}
                     </button>
                     <button 
                       onClick={() => setCartStep(3)}
                       disabled={!shippingAddress.street || !shippingAddress.city || !shippingAddress.zip}
-                      className="flex-1 py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all disabled:opacity-50"
+                      class="flex-1 py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all disabled:opacity-50"
                     >
                       {t('Finish Order')}
                     </button>
                   </div>
                 )}
                 {cartStep === 3 && (
-                  <div className="flex flex-col gap-4">
+                  <div class="flex flex-col gap-4">
                     <button 
                       onClick={handleCopySummary}
-                      className="w-full py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all flex items-center justify-center gap-3"
+                      class="w-full py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all flex items-center justify-center gap-3"
                     >
                       {isCopied ? <Check size={24} /> : <Share2 size={24} />}
                       {isCopied ? t('Copied!') : t('Share Order')}
                     </button>
                     <button 
                       onClick={() => { setIsCartOpen(false); setCart([]); setCartStep(1); }}
-                      className="w-full py-4 text-gray-400 font-bold hover:text-gray-900 transition-colors"
+                      class="w-full py-4 text-gray-400 font-bold hover:text-gray-900 transition-colors"
                     >
                       {t('Review items')}
                     </button>
@@ -499,10 +500,10 @@ const PublicCatalogView: React.FC<Props> = ({ catalog, products, categories, sto
   );
 };
 
-const FilterButton: React.FC<{ active: boolean; label: string; onClick: () => void }> = ({ active, label, onClick }) => (
+const FilterButton = ({ active, label, onClick }: { active: boolean; label: string; onClick: () => void }) => (
   <button 
     onClick={onClick}
-    className={`w-full text-left px-4 py-2.5 rounded-2xl text-sm font-bold transition-all ${active ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' : 'text-gray-500 hover:bg-gray-50'}`}
+    class={`w-full text-left px-4 py-2.5 rounded-2xl text-sm font-bold transition-all ${active ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' : 'text-gray-500 hover:bg-gray-50'}`}
   >
     {label}
   </button>

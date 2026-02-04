@@ -23,6 +23,7 @@ import PublicCatalogView from './components/PublicCatalogView';
 import Settings from './components/Settings';
 import LocationManager from './components/LocationManager';
 import LocationDetail from './components/LocationDetail';
+import { h } from 'preact';
 
 const STORAGE_KEY = 'merchant_hub_data';
 
