@@ -1,29 +1,35 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  }
+    // General compilation settings
+    "composite": true,
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": false,
+    "sourceMap": true,
+    // Strictness-related settings
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    // Settings for module resolution and emit
+    "resolveJsonModule": true,
+    "resolvePackageJsonImports": true,
+    "importHelpers": true,
+    "target": "ES2020",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "lib": ["DOM", "ES2020"],
+    "jsx": "react" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "noEmit": true /* Do not emit outputs. */,
+    /* Module Resolution Options */
+    "allowSyntheticDefaultImports": true /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */,
+    "skipLibCheck": true /* Skip type checking of declaration files. */
+  },
+  "include": ["src/**/*"]
 }
