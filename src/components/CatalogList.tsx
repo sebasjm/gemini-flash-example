@@ -1,6 +1,6 @@
 
 import React, { useState } from 'preact/hooks';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../react-i18next';
 import { BookOpen, Plus, Trash2, ArrowRight, X, Sparkles } from 'lucide-react';
 import { Catalog, Product } from '../types';
 import { generateCatalogSummary } from '../services/geminiService';

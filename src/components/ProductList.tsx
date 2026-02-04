@@ -13,7 +13,7 @@ import {
   X,
 } from "lucide-react";
 import React, { useRef, useState } from "preact/hooks";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "../react-i18next";
 import { generateProductDescription } from "../services/geminiService";
 import { Category, Product, StorageLocation } from "../types";
 import { h, TargetedEvent } from "preact";

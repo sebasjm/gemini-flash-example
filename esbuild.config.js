@@ -5,7 +5,7 @@ esbuild.build({
   entryPoints: ['src/index.tsx'],
   bundle: true,
   outfile: 'dist/index.js',
-  minify: true,
+  minify: false,
   sourcemap: true,
   format: 'esm',
   target: ['es2020'],

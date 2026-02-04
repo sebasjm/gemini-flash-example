@@ -1,5 +1,5 @@
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../react-i18next';
 import { AppState, ViewState } from '../types';
 import { ShoppingBag, Book, Users, TrendingUp, Package } from 'lucide-react';
 import { h } from 'preact';

@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from 'preact/hooks';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../react-i18next';
 import { ArrowLeft, Eye, Share2, Plus, Trash2, Check, Copy, Facebook, DollarSign, Tag as TagIcon, LayoutGrid } from 'lucide-react';
 import { Catalog, Product } from '../types';
 import { h } from 'preact';

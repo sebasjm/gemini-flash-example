@@ -1,5 +1,5 @@
 import React, { useState } from "preact/hooks";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "../react-i18next";
 import {
   MapPin,
   Plus,

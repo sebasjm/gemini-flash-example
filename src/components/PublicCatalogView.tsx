@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'preact/hooks';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../react-i18next';
 import { 
   ArrowLeft, ShoppingBag, Share2, X, ChevronLeft, ChevronRight, 
   Filter, Search, MapPin, Trash2, Plus, Minus, Check, Copy, Truck, ShoppingCart 

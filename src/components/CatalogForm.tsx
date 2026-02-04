@@ -2,7 +2,7 @@
 import { Sparkles, X } from 'lucide-react';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../react-i18next';
 import { generateCatalogSummary } from '../services/geminiService';
 import { Catalog, Product } from '../types';
 

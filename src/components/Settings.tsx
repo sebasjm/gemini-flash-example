@@ -1,6 +1,6 @@
 
 import React, { h } from 'preact';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../react-i18next';
 import { Globe, Check } from 'lucide-react';
 
 const Settings=  () => {
