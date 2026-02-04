@@ -120,7 +120,7 @@ const CatalogDetail = ({ catalog, allProducts, onUpdate, onUpdateProducts, onBac
                           placeholder="Price"
                           class="w-full pl-8 pr-3 py-2 bg-emerald-50 border-none rounded-xl text-sm font-bold text-emerald-700 outline-none focus:ring-2 focus:ring-emerald-500/20"
                           value={product.price}
-                          onChange={(e) => handleUpdateProductInplace(product.id, { price: parseFloat(e.target.value) })}
+                          onChange={(e) => handleUpdateProductInplace(product.id, { price: parseFloat(e.currentTarget.value) })}
                         />
                       </div>
                       <div class="relative">
@@ -130,7 +130,7 @@ const CatalogDetail = ({ catalog, allProducts, onUpdate, onUpdateProducts, onBac
                           placeholder="Tag (e.g. 10% Off)"
                           class="w-full pl-8 pr-3 py-2 bg-indigo-50 border-none rounded-xl text-sm font-bold text-indigo-700 outline-none focus:ring-2 focus:ring-indigo-500/20"
                           value={product.tag || ''}
-                          onChange={(e) => handleUpdateProductInplace(product.id, { tag: e.target.value })}
+                          onChange={(e) => handleUpdateProductInplace(product.id, { tag: e.currentTarget.value })}
                         />
                       </div>
                     </div>
@@ -141,7 +141,7 @@ const CatalogDetail = ({ catalog, allProducts, onUpdate, onUpdateProducts, onBac
                       type="color" 
                       class="w-8 h-8 rounded-full cursor-pointer border-none p-0 bg-transparent overflow-hidden" 
                       value={product.tagColor || '#4f46e5'}
-                      onChange={(e) => handleUpdateProductInplace(product.id, { tagColor: e.target.value })}
+                      onChange={(e) => handleUpdateProductInplace(product.id, { tagColor: e.currentTarget.value })}
                     />
                     <button 
                       onClick={() => removeProduct(product.id)}

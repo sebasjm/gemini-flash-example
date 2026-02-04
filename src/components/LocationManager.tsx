@@ -71,7 +71,7 @@ const LocationManager = ({ locations, onUpdate, onSelectLocation }: Props) => {
             placeholder={t("Search locations...")}
             class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-gray-900"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.currentTarget.value)}
           />
         </div>
       </div>
@@ -200,7 +200,7 @@ const LocationForm = ({ location, onClose, onSave }: {
                 type="text"
                 class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setName(e.currentTarget.value)}
               />
             </div>
             <div>
@@ -211,7 +211,7 @@ const LocationForm = ({ location, onClose, onSave }: {
                 rows={3}
                 class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.currentTarget.value)}
               />
             </div>
           </div>

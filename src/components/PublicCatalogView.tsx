@@ -129,7 +129,7 @@ const PublicCatalogView = ({ catalog, products, categories, storageLocations = [
                 placeholder={t('Search products in {{name}}...', { name: catalog.name })}
                 class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border-none rounded-full focus:ring-2 focus:ring-indigo-500/20 text-sm"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.currentTarget.value)}
               />
             </div>
           </div>
@@ -378,7 +378,7 @@ const PublicCatalogView = ({ catalog, products, categories, storageLocations = [
                           placeholder="Street Address" 
                           class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
                           value={shippingAddress.street}
-                          onChange={e => setShippingAddress({ ...shippingAddress, street: e.target.value })}
+                          onChange={e => setShippingAddress({ ...shippingAddress, street: e.currentTarget.value })}
                         />
                         <div class="grid grid-cols-2 gap-4">
                           <input 
@@ -386,14 +386,14 @@ const PublicCatalogView = ({ catalog, products, categories, storageLocations = [
                             placeholder="City" 
                             class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
                             value={shippingAddress.city}
-                            onChange={e => setShippingAddress({ ...shippingAddress, city: e.target.value })}
+                            onChange={e => setShippingAddress({ ...shippingAddress, city: e.currentTarget.value })}
                           />
                           <input 
                             type="text" 
                             placeholder="Zip Code" 
                             class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20"
                             value={shippingAddress.zip}
-                            onChange={e => setShippingAddress({ ...shippingAddress, zip: e.target.value })}
+                            onChange={e => setShippingAddress({ ...shippingAddress, zip: e.currentTarget.value })}
                           />
                         </div>
                       </div>

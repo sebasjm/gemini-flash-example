@@ -92,7 +92,7 @@ const ProductList = ({
             placeholder={t("Search products or categories...")}
             class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-gray-900"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.currentTarget.value)}
           />
         </div>
         <button class="flex items-center gap-2 px-4 py-3 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 w-full md:w-auto bg-white transition-colors">
@@ -411,7 +411,7 @@ const ProductForm = ({
                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
                   value={formData.name}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, name: e.target.value }))
+                    setFormData((prev) => ({ ...prev, name: e.currentTarget.value }))
                   }
                 />
               </div>
@@ -428,7 +428,7 @@ const ProductForm = ({
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      price: parseFloat(e.target.value),
+                      price: parseFloat(e.currentTarget.value),
                     }))
                   }
                 />
@@ -442,7 +442,7 @@ const ProductForm = ({
                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
                   value={formData.tag}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, tag: e.target.value }))
+                    setFormData((prev) => ({ ...prev, tag: e.currentTarget.value }))
                   }
                 />
               </div>
@@ -458,7 +458,7 @@ const ProductForm = ({
                   class="w-full px-4 py-3 border border-gray-200 rounded-xl"
                   value={formData.sku}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, sku: e.target.value }))
+                    setFormData((prev) => ({ ...prev, sku: e.currentTarget.value }))
                   }
                 />
               </div>
@@ -474,7 +474,7 @@ const ProductForm = ({
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      quantity: parseInt(e.target.value),
+                      quantity: parseInt(e.currentTarget.value),
                     }))
                   }
                 />
@@ -506,7 +506,7 @@ const ProductForm = ({
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      storageLocationId: e.target.value,
+                      storageLocationId: e.currentTarget.value,
                     }))
                   }
                 >
@@ -542,7 +542,7 @@ const ProductForm = ({
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    description: e.target.value,
+                    description: e.currentTarget.value,
                   }))
                 }
               />
@@ -742,7 +742,7 @@ const CategoryDialog = ({
           class="w-full px-4 py-3 border border-gray-200 rounded-xl mb-4"
           placeholder={t("Category Name")}
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.currentTarget.value)}
         />
         <div class="flex gap-4">
           <button
