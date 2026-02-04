@@ -19,43 +19,43 @@ const Dashboard = ({ state, onNavigate }: Props) => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div class="space-y-8">
       <div>
-        <h2 className="text-3xl font-bold text-gray-900">{t('Welcome back, Merchant')}</h2>
-        <p className="text-gray-500 mt-2">{t("Here's what's happening with your store today.")}</p>
+        <h2 class="text-3xl font-bold text-gray-900">{t('Welcome back, Merchant')}</h2>
+        <p class="text-gray-500 mt-2">{t("Here's what's happening with your store today.")}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
-          <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className={`${stat.color} p-3 rounded-xl text-white`}>{stat.icon}</div>
+          <div key={i} class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class={`${stat.color} p-3 rounded-xl text-white`}>{stat.icon}</div>
             <div>
-              <div className="text-sm font-medium text-gray-500">{stat.label}</div>
-              <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+              <div class="text-sm font-medium text-gray-500">{stat.label}</div>
+              <div class="text-2xl font-bold text-gray-900">{stat.value}</div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-lg font-bold mb-6">{t('Recent Inventory')}</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <h3 class="text-lg font-bold mb-6">{t('Recent Inventory')}</h3>
             {state.products.length === 0 ? (
-              <div className="text-center py-12 text-gray-400">
-                <Package size={48} className="mx-auto mb-4 opacity-20" />
+              <div class="text-center py-12 text-gray-400">
+                <Package size={48} class="mx-auto mb-4 opacity-20" />
                 <p>{t('Your inventory is empty.')}</p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div class="space-y-4">
                 {state.products.slice(0, 5).map(product => (
-                  <div key={product.id} className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-xl transition-colors">
-                    <img src={product.imageUrls[0] || 'https://via.placeholder.com/100'} alt={product.name} className="w-12 h-12 rounded-lg object-cover bg-gray-100" />
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">{product.name}</div>
-                      <div className="text-xs text-gray-500">{state.categories.find(c => c.id === product.categoryId)?.name || t('General')}</div>
+                  <div key={product.id} class="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-xl transition-colors">
+                    <img src={product.imageUrls[0] || 'https://via.placeholder.com/100'} alt={product.name} class="w-12 h-12 rounded-lg object-cover bg-gray-100" />
+                    <div class="flex-1">
+                      <div class="font-medium text-gray-900">{product.name}</div>
+                      <div class="text-xs text-gray-500">{state.categories.find(c => c.id === product.categoryId)?.name || t('General')}</div>
                     </div>
-                    <div className="text-indigo-600 font-bold text-xs uppercase">{product.sku || 'No SKU'}</div>
+                    <div class="text-indigo-600 font-bold text-xs uppercase">{product.sku || 'No SKU'}</div>
                   </div>
                 ))}
               </div>
@@ -63,11 +63,11 @@ const Dashboard = ({ state, onNavigate }: Props) => {
           </div>
         </div>
 
-        <div className="space-y-6">
-          <div className="bg-gradient-to-br from-indigo-600 to-violet-700 p-6 rounded-2xl shadow-lg text-white">
-            <h3 className="text-lg font-bold mb-2">{t('Setup your domain')}</h3>
-            <p className="text-indigo-100 text-sm mb-6">{t('Connect your custom domain to create a professional storefront.')}</p>
-            <button onClick={() => onNavigate('settings')} className="w-full py-3 bg-white text-indigo-600 rounded-xl font-bold shadow-sm hover:bg-indigo-50 transition-colors">{t('Configure Domain')}</button>
+        <div class="space-y-6">
+          <div class="bg-gradient-to-br from-indigo-600 to-violet-700 p-6 rounded-2xl shadow-lg text-white">
+            <h3 class="text-lg font-bold mb-2">{t('Setup your domain')}</h3>
+            <p class="text-indigo-100 text-sm mb-6">{t('Connect your custom domain to create a professional storefront.')}</p>
+            <button onClick={() => onNavigate('settings')} class="w-full py-3 bg-white text-indigo-600 rounded-xl font-bold shadow-sm hover:bg-indigo-50 transition-colors">{t('Configure Domain')}</button>
           </div>
         </div>
       </div>
